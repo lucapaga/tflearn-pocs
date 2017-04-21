@@ -1,0 +1,2 @@
+model_checkpoint_path: "C:\\opt\\projects\\tensorflow\\tflearn-pocs\\tflearnMNIST\\sessions\\model_20170421_1715.tfl"
+all_model_checkpoint_paths: "C:\\opt\\projects\\tensorflow\\tflearn-pocs\\tflearnMNIST\\sessions\\model_20170421_1715.tfl"

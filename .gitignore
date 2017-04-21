@@ -87,3 +87,11 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# CUSTOMZ
+tutorial/data/*.csv
+*.gz
+myMNIST/sessions/**/checkpoint
+myMNIST/sessions/**/*.meta
+myMNIST/sessions/**/*.index
+myMNIST/sessions/**/*.data*
