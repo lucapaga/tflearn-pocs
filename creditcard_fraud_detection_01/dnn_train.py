@@ -74,17 +74,17 @@ def provide_training_labeled_data():
     by the number of fraudulent transactions will equal the number of normal transaction.
     Simply put: # of fraud * ratio = # of normal
     '''
-    #ratio = len(X_train)/count_Frauds
-    #y_train.Fraud *= ratio
-    #y_test.Fraud *= ratio
+#    ratio = len(X_train)/count_Frauds
+#    y_train.Fraud *= ratio
+#    y_test.Fraud *= ratio
 
     #Transform each feature in features so that it has a mean of 0 and standard deviation of 1;
     #this helps with training the neural network.
-    features = X_train.columns.values
-    for feature in features:
-        mean, std = df[feature].mean(), df[feature].std()
-        X_train.loc[:, feature] = (X_train[feature] - mean) / std
-        X_test.loc[:, feature] = (X_test[feature] - mean) / std
+#    features = X_train.columns.values
+#    for feature in features:
+#        mean, std = df[feature].mean(), df[feature].std()
+#        X_train.loc[:, feature] = (X_train[feature] - mean) / std
+#        X_test.loc[:, feature] = (X_test[feature] - mean) / std
 
     data    = X_train
     labels  = y_train
@@ -102,14 +102,28 @@ def provide_training_labeled_data():
     print('[DEBUG]  TEST |  DATA Columns (' , str(len(tData.columns)), '): ', tData.columns.values)           # 30 inputs
     print('[DEBUG]  TEST | LABEL Columns (' , str(len(tLabels.columns)), '): ', tLabels.columns.values)       # 1  output (binary classifier)
 
-    return data.as_matrix(), labels.as_matrix(), tData.as_matrix(), tLabels.as_matrix()
+    # FINAL CHECK DATA: 1 Fraud and 1 Normal
+    X_fc = Fraud.sample(n=1)
+    X_fc = pd.concat([X_fc, Normal.sample(n=1)], axis = 0)
+    print('[DEBUG] FINAL VERIFICATION DATA (1): ', X_fc.as_matrix())
+    X_fc = X_fc.drop(['Fraud','Normal'], axis = 1).as_matrix()
+    print('[DEBUG] FINAL VERIFICATION DATA (2): ', X_fc)
+    Y_fc = [[1, 0], [0, 1]]
+
+    return data.as_matrix(), labels.as_matrix(), tData.as_matrix(), tLabels.as_matrix(), X_fc, Y_fc
 # ------------------------------------------------------------------------------
 
 
 # ------------------------------------------------------------------------------
 # ---------[ THE PROGRAM! ]-----------------------------------------------------
-data, labels, tData, tLabels = provide_training_labeled_data()
+data, labels, tData, tLabels, X_fc, Y_fc = provide_training_labeled_data()
 dnn_model = create_net_architecture()
-dnn_model = train_dnn(dnn_model, data, labels, tData, tLabels, a_batch_size=2048, num_epochs=5)
-dnn_model.save("sessions/model_20170426_1530.tfl")
+dnn_model = train_dnn(dnn_model, data, labels, tData, tLabels, a_batch_size=2048, num_epochs=20)
+dnn_model.save("sessions/model_20170427_1700.tfl")
+
+# ---------[ THE CHECK! ]-------------------------------------------------------
+print('PREDICTION FOR: ', X_fc)
+print('EXPECTED: ', Y_fc)
+Y_fc_p = dnn_model.predict(X_fc)
+print('PREDICTION: ', Y_fc_p)
 # ------------------------------------------------------------------------------
