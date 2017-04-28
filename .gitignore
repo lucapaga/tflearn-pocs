@@ -95,6 +95,10 @@ myMNIST/sessions/**/checkpoint
 myMNIST/sessions/**/*.meta
 myMNIST/sessions/**/*.index
 myMNIST/sessions/**/*.data*
+tflearnMNIST/sessions/**/checkpoint
+tflearnMNIST/sessions/**/*.meta
+tflearnMNIST/sessions/**/*.index
+tflearnMNIST/sessions/**/*.data*
 creditcard_data/*.csv
 creditcard_data/*.zip
 creditcard_fraud_detection_01/sessions/**/checkpoint

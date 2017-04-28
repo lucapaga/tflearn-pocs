@@ -99,8 +99,8 @@ def provide_training_labeled_data():
     print('[DEBUG] TRAIN |  DATA Columns (' , str(len(data.columns)), '): ', data.columns.values)           # 30 inputs
     print('[DEBUG] TRAIN | LABEL Columns (' , str(len(labels.columns)), '): ', labels.columns.values)       # 1  output (binary classifier)
     print('[DEBUG]  TEST |        Volume (SAMPLES): ', str(len(tData.values)))           # 30 inputs
-    print('[DEBUG] TRAIN |        Volume (FRAUDIZ): ', str(len(tData[df.Fraud == 1].values)))           # 30 inputs
-    print('[DEBUG] TRAIN |        Volume (NON-FRZ): ', str(len(tData[df.Normal == 1].values)))           # 30 inputs
+    print('[DEBUG]  TEST |        Volume (FRAUDIZ): ', str(len(tData[df.Fraud == 1].values)))           # 30 inputs
+    print('[DEBUG]  TEST |        Volume (NON-FRZ): ', str(len(tData[df.Normal == 1].values)))           # 30 inputs
     print('[DEBUG]  TEST |  DATA Columns (' , str(len(tData.columns)), '): ', tData.columns.values)           # 30 inputs
     print('[DEBUG]  TEST | LABEL Columns (' , str(len(tLabels.columns)), '): ', tLabels.columns.values)       # 1  output (binary classifier)
 
@@ -120,8 +120,8 @@ def provide_training_labeled_data():
 # ---------[ THE PROGRAM! ]-----------------------------------------------------
 data, labels, tData, tLabels, X_fc, Y_fc = provide_training_labeled_data()
 dnn_model = create_net_architecture()
-dnn_model = train_dnn(dnn_model, data, labels, tData, tLabels, a_batch_size=2048, num_epochs=20)
-dnn_model.save("sessions/model_20170427_1700.tfl")
+#dnn_model = train_dnn(dnn_model, data, labels, tData, tLabels, a_batch_size=2048, num_epochs=20)
+#dnn_model.save("sessions/model_20170427_1700.tfl")
 
 # ---------[ THE CHECK! ]-------------------------------------------------------
 print('PREDICTION FOR: ', X_fc)
