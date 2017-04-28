@@ -4,7 +4,7 @@
 
 This "problem" comes from https://www.kaggle.com/dalpozz/creditcardfraud
 
-## Description of the data-set
+## Description of the DATA-SET
 
 The datasets contains transactions made by credit cards in September 2013 by european cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. The dataset is highly unbalanced, the positive class (frauds) account for 0.172% of all transactions.
 
@@ -15,3 +15,35 @@ Given the class imbalance ratio, we recommend measuring the accuracy using the A
 The dataset has been collected and analysed during a research collaboration of Worldline and the Machine Learning Group (http://mlg.ulb.ac.be) of ULB (Université Libre de Bruxelles) on big data mining and fraud detection. More details on current and past projects on related topics are available on http://mlg.ulb.ac.be/BruFence and http://mlg.ulb.ac.be/ARTML
 
 Please cite: Andrea Dal Pozzolo, Olivier Caelen, Reid A. Johnson and Gianluca Bontempi. Calibrating Probability with Undersampling for Unbalanced Classification. In Symposium on Computational Intelligence and Data Mining (CIDM), IEEE, 2015
+
+## Test Runs
+
+### Test Run Nr. 1
+
+MODEL:
+
+Activation/H | Activation/O | Loss | Optimizer | Metric | Rate
+--- | --- | --- | --- | --- | ---
+TANH | SOFTMAX | 'softmax_categorical_crossentropy' | ADAM | 'accuracy' | 0.005
+
+RESULTS during TRAINING:
+
+Nr. of Epochs | Loss | Metric | VAL Loss | VAL Metric
+--- | --- | --- | --- | ---
+20 | 0.9952 | 0.75975 | 0.9960
+
+RESULS with TEST SAMPLES:
+
+Type | Probability of Being Fraud | Probability of Being Fraud | Match?
+--- | --- | --- | ---
+FRAUD  | 4.207121762078714e-08 | 1.0 | NO
+NORMAL | 4.207121762078714e-08 | 1.0 | YES
+
+
+
+### RECAP
+
+Test Run | Fraud/Normal | Fraud Probability | Normal Probability | Match?
+--- | --- | --- | --- | ---
+1 | FRAUD | 4.207121762078714e-08 | 1.0 | NO
+  | NORMAL | 4.207121762078714e-08 | 1.0 | YES
