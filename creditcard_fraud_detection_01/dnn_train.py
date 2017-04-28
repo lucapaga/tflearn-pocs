@@ -78,8 +78,10 @@ def provide_training_labeled_data():
 #    y_train.Fraud *= ratio
 #    y_test.Fraud *= ratio
 
-    #Transform each feature in features so that it has a mean of 0 and standard deviation of 1;
-    #this helps with training the neural network.
+    # Z-SCORE NORMALIZATION:
+    # ---------------------
+    # Transform each feature in features so that it has a mean of 0 and standard deviation of 1;
+    #  this helps with training the neural network.
 #    features = X_train.columns.values
 #    for feature in features:
 #        mean, std = df[feature].mean(), df[feature].std()

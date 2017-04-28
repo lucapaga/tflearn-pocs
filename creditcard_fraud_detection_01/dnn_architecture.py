@@ -22,8 +22,8 @@ def custom_metric_function(y_pred, y_true, x):
 #
 input_layer_neurons=30                 # INPUT NEURONS
 first_h_layer_neurons=15               # 1st HIDDEN LAYER NEURONS
-second_h_layer_neurons=45              # 2nd HIDDEN LAYER NEURONS
-third_h_layer_neurons=60              # 2nd HIDDEN LAYER NEURONS
+second_h_layer_neurons=18              # 2nd HIDDEN LAYER NEURONS
+third_h_layer_neurons=27              # 2nd HIDDEN LAYER NEURONS
 p_keep_hidden=0.9                       # DROPOUT PARAMETERS FOR HIDDEN LAYERS
 output_layer_neurons=2                 # OUTPUT NEURONS
 training_speed=0.005                    # TRAINING SPEED
@@ -37,31 +37,35 @@ def create_net_architecture():
     dense1      = tflearn.fully_connected(
                         input_layer,
                         first_h_layer_neurons,
-                        activation='sigmoid',
+                        activation='relu',
                         weights_init=tflearn.initializations.truncated_normal(stddev=0.15),
                         name='dense1'
                     )
     dense2      = tflearn.fully_connected(
                         dense1,
                         second_h_layer_neurons,
-                        activation='sigmoid',
+                        activation='relu',
                         weights_init=tflearn.initializations.truncated_normal(stddev=0.15),
                         name='dense2'
                     )
     dense3      = tflearn.fully_connected(
                         dense2,
                         third_h_layer_neurons,
-                        activation='sigmoid',
+                        activation='relu',
                         weights_init=tflearn.initializations.truncated_normal(stddev=0.15),
                         name='dense3'
                     )
+
+    '''
     pre_smax    = tflearn.dropout(
                         dense3,
                         p_keep_hidden,
                         name='dense3_dropout'
                     )
+    '''
+
     softmax     = tflearn.fully_connected(
-                        pre_smax,
+                        dense3,
                         output_layer_neurons,
                         activation='softmax',
                         weights_init=tflearn.initializations.truncated_normal(stddev=0.15),
@@ -69,10 +73,12 @@ def create_net_architecture():
                     )
     #
     # loss='softmax_categorical_crossentropy',
+    # loss=custom_loss_function,
+    # metric='accuracy',
     # metric=custom_metric_function,
     regression  = tflearn.regression(
                         softmax,
-                        loss=custom_loss_function,
+                        loss='softmax_categorical_crossentropy',
                         optimizer='adam',
                         metric='accuracy',
                         learning_rate=training_speed

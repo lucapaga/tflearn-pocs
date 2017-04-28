@@ -18,32 +18,42 @@ Please cite: Andrea Dal Pozzolo, Olivier Caelen, Reid A. Johnson and Gianluca Bo
 
 ## Test Runs
 
-### Test Run Nr. 1
+### MODEL AND TRAINING:
 
-MODEL:
-
-Activation/H | Activation/O | Loss | Optimizer | Metric | Rate
---- | --- | --- | --- | --- | ---
-TANH | SOFTMAX | 'softmax_categorical_crossentropy' | ADAM | 'accuracy' | 0.005
-
-RESULTS during TRAINING:
-
-Nr. of Epochs | Loss | Metric | VAL Loss | VAL Metric
---- | --- | --- | --- | ---
-20 | 0.9952 | 0.75975 | 0.9960
-
-RESULS with TEST SAMPLES:
-
-Type | Probability of Being Fraud | Probability of Being Fraud | Match?
---- | --- | --- | ---
-FRAUD  | 4.207121762078714e-08 | 1.0 | NO
-NORMAL | 4.207121762078714e-08 | 1.0 | YES
+Nr. | Activation/H | Activation/O | Loss | Optimizer | Metric | Rate | Nr. of Epochs | Loss | Metric | VAL Loss | VAL Metric
+--- | --- | --- | --- | --- | --- | ---
+1  | TANH    | SOFTMAX | 'softmax_categorical_crossentropy'   | ADAM | 'accuracy' | 0.005 | 20 | 0.82385    | 0.9952 | 0.75975    | 0.9960
+2  | SIGMOID | SOFTMAX | 'softmax_categorical_crossentropy'   | ADAM | 'accuracy' | 0.005 | 20 | 0.77549    | 0.9913 | 0.77621    | 0.9899
+3  | SIGMOID | SOFTMAX | CUSTOM (called x-entropy as well...) | ADAM | 'accuracy' | 0.005 | 20 | 2229.34668 | 0.9992 | 1486.91815 | 0.9992
+4  | TANH    | SOFTMAX | CUSTOM (called x-entropy as well...) | ADAM | 'accuracy' | 0.005 | 20 | 1597.01648 | 0.9993 | 2822.24431 | 0.9994
+5  | RELU    | SOFTMAX | CUSTOM (called x-entropy as well...) | ADAM | 'accuracy' | 0.005 | 20 | NaN        | 0.0017 | NaN        | 0.0017
+6  | RELU    | SOFTMAX | 'softmax_categorical_crossentropy'   | ADAM | 'accuracy' | 0.005 | 20 | 0.67621    | 0.9931 | 0.74155    | 0.9943
+7  | RELU    | SOFTMAX | 'softmax_categorical_crossentropy'   | ADAM | 'accuracy' | 0.005 | 20 | 0.31490    | 0.9984 | 0.31498    | 0.9983
+8  | RELU    | SOFTMAX | 'softmax_categorical_crossentropy'   | ADAM | 'accuracy' | 0.005 | 20 | 0.31532    | 0.9979 | 0.31498    | 0.9983
 
 
+Notes:
+ - Test nr. 7 is a 6 without the "imbalance fixing"
+ - Test nr. 8 is a 8 without the dropout layer
 
-### RECAP
+
+### RESULTS:
 
 Test Run | Fraud/Normal | Fraud Probability | Normal Probability | Match?
 --- | --- | --- | --- | ---
-1 | FRAUD | 4.207121762078714e-08 | 1.0 | NO
-\ | NORMAL | 4.207121762078714e-08 | 1.0 | YES
+1  | FRAUD  | 4.207121762078714 e-08  | 1.0                | NO
+1  | NORMAL | 4.207121762078714 e-08  | 1.0                | YES
+2  | FRAUD  | 2.3533789317298215 e-07 | 0.9999997615814209 | NO
+2  | NORMAL | 2.3533789317298215 e-07 | 0.9999997615814209 | YES
+3  | FRAUD  | 7.377072324743494 e-05  | 0.9999262094497681 | NO
+3  | NORMAL | 7.377072324743494 e-05  | 0.9999262094497681 | YES
+4  | FRAUD  | 1.223582057718886 e-05  | 0.9999877214431763 | NO
+4  | NORMAL | 1.223582057718886 e-05  | 0.9999877214431763 | YES
+5  | FRAUD  | NaN                     | NaN                | NO
+5  | NORMAL | NaN                     | NaN                | YES
+6  | FRAUD  | 0                       | 1                  | NO
+6  | NORMAL | 0                       | 1                  | YES
+7  | FRAUD  | 0                       | 1                  | NO
+7  | NORMAL | 0                       | 1                  | YES
+8  | FRAUD  | 0                       | 1                  | NO
+8  | NORMAL | 0                       | 1                  | YES
