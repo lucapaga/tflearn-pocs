@@ -46,4 +46,4 @@ NORMAL | 4.207121762078714e-08 | 1.0 | YES
 Test Run | Fraud/Normal | Fraud Probability | Normal Probability | Match?
 --- | --- | --- | --- | ---
 1 | FRAUD | 4.207121762078714e-08 | 1.0 | NO
-  | NORMAL | 4.207121762078714e-08 | 1.0 | YES
+\ | NORMAL | 4.207121762078714e-08 | 1.0 | YES
