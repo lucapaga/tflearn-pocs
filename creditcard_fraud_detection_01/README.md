@@ -21,7 +21,7 @@ Please cite: Andrea Dal Pozzolo, Olivier Caelen, Reid A. Johnson and Gianluca Bo
 ### MODEL AND TRAINING:
 
 Nr. | Activation/H | Activation/O | Loss | Optimizer | Metric | Rate | Nr. of Epochs | Loss | Metric | VAL Loss | VAL Metric
---- | --- | --- | --- | --- | --- | ---
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
 1  | TANH    | SOFTMAX | 'softmax_categorical_crossentropy'   | ADAM | 'accuracy' | 0.005 | 20 | 0.82385    | 0.9952 | 0.75975    | 0.9960
 2  | SIGMOID | SOFTMAX | 'softmax_categorical_crossentropy'   | ADAM | 'accuracy' | 0.005 | 20 | 0.77549    | 0.9913 | 0.77621    | 0.9899
 3  | SIGMOID | SOFTMAX | CUSTOM (called x-entropy as well...) | ADAM | 'accuracy' | 0.005 | 20 | 2229.34668 | 0.9992 | 1486.91815 | 0.9992
